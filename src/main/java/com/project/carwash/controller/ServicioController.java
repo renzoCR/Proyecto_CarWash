@@ -21,18 +21,22 @@ public class ServicioController {
 	@RequestMapping("/lista")
 	public String listar(Model model) {
 		model.addAttribute("servicio", ser.listarTodo());
-		return "Servicio";
+		return "servicio";
 	}
 	@RequestMapping("/grabar")
 	public String grabar(
 			@RequestParam("codigo") Integer cod,
 			@RequestParam("nombre") String nom,
+			@RequestParam("descripcion") String desc,
+
 			@RequestParam("precio") double pre,
 			RedirectAttributes redirect) {
 		try {
 			Servicio servicio = new Servicio();
 			servicio.setNombre(nom);
 			servicio.setPrecio(pre);
+			servicio.setDescripcion(desc);
+
 			
 			if(cod==0) {
 				ser.Registrar(servicio);
@@ -52,6 +56,13 @@ public class ServicioController {
 	@ResponseBody
 	public Servicio Buscar(@RequestParam("codigo") Integer cod) {
 		return ser.Buscar(cod);
+	}
+	@RequestMapping("/eliminar")
+	public String eliminar(@RequestParam("codigo") Integer cod,
+			RedirectAttributes redirect) {
+		ser.Eliminar(cod);
+		redirect.addFlashAttribute("MENSAJE" , "Servicio eliminado");
+		return "redirect:/servicio/lista";
 	}
 	
 }

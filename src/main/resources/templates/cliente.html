@@ -10,160 +10,23 @@
 <link rel="stylesheet" th:href="@{/resources/alertify	js/css/alertify.css}">
 <link rel="stylesheet" th:href="@{/resources/alertifyjs/css/alertify.min.css}"> 
 <link rel="stylesheet" th:href="@{/resources/css/mantenimiento.css}"> 
-
-<style media="screen">
-     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-     *{
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- font-family: "Poppins", sans-serif;
-}
-
-body{
- min-height: 100vh;
- background: #b3deff9c;
- color: #000;
- background-size: cover;
- background-position: center;
-}
-
-.side-bar{
- background: #00FF0000 ;
- backdrop-filter: blur(15px);
- width: 250px;
- height: 100vh;
- position: fixed;
- top: 0;
- left: 0;
- overflow-y: auto;
- transition: 0.6s ease;
- transition-property: left;
- bottom: 0;
-}
-
-.side-bar.active{
- left: 0;
-}
-h1{
-  text-align: center;
-  font-weight: 400;
-  font-size: 20px;
-  padding-bottom: 10px;
-  font-family: "Poppins", sans-serif;
-  letter-spacing: 2px;
-}
-
-.side-bar .menu .item a{
- color: #000;
- font-size: 16px;
- text-decoration: none;
- display: block;
- padding: 5px 30px;
- line-height: 60px;
-}
-
-.side-bar .menu .item a:hover{
- background: #8beafd6d;
- transition: 0.3s ease;
-}
-
-.side-bar .menu .item i{
- margin-right: 15px;
-}
-
-.side-bar .menu .item a .dropdown{
- position: absolute;
- right: 0;
- margin: 20px;
-}
-
-.side-bar .menu .item .sub-menu{
- background: #00FF0000;
- display: none;
-}
-
-.side-bar .menu .item .sub-menu a{
- line-height : 35px;
- padding-left: 50px;
-}
-img{
-  width: 100px;
-  margin: 15px;
-  border-radius: 50%;
-  margin-left: 70px;
-  border: 3px solid #000000;
-}
-header{
-  background: #8beafd6d;
-}
-
-.container {
-    position: absolute;
-    top: 0;
-    left: 250px; 
-    right: 0;
-    bottom: 0;
-    padding: 0 20px; 
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center; 
-}
-
-table {
-    width: 100%; 
-    max-width: 800px; 
-    margin: 0 auto; 
-}
-
- </style>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+ 
+ 
  </head>
-<body>
-	 <!-- ============= Home Section =============== -->
-
-   <div class="side-bar active">
-        <header>
-            <img src="/resources/img/logo.jpg" alt="">
-            <h1>===CarWash===</h1>
-        </header>
-        <div class="menu">
-            <div class="item"><a th:href="@{/client/form}"><i class="fas fa-desktop"></i>Client</a></div>
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-table"></i>Mantenimiento<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a th:href="@{/empleado/lista}" class="sub-item">Empleado</a>
-                    <a th:href="@{/cliente/lista}" class="sub-item">Cliente</a>
-                    <a th:href="@{/vehiculo/lista}" class="sub-item">Vehiculo</a>
-                    <a th:href="@{/servicio/lista}" class="sub-item">Servicio</a>
-                    <a th:href="@{/categoria/lista}" class="sub-item">Categoria</a>
-                </div>
-            </div>
-            <div class="item"><a href="#"><i class="fas fa-th"></i>Ventas</a></div>
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-cogs"></i>Consultas<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a th:href="@{/boleta/form}" class="sub-item">Boleta por fecha</a>
-                    <a th:href="@{/ingresoSede/form}" class="sub-item">Ingreso mensual</a>
-                    <a th:href="@{/servicioEmp/form}" class="sub-item">Servicios por empleado</a>
-                </div>
-            </div>
-            <div class="item"><a th:href="@{/informe/form}"><i class="fas fa-th"></i>Informes</a></div>
-            <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
-        </div>
-    </div>
+<body style="background-color: rgb(218, 218, 218);">
+<!-- ============= Home Section =============== -->
+<div class="d-flex flex-row ">
+<!-- ============= Home Section =============== -->
+    <div th:replace="~{plantilla/UITemplate :: cabecera}"></div>
     
     <!-- ============= Fin Home Section =============== -->
-    
-	<div class="container">
-		<h3 class="text-center mt-4">LISTA DE CLIENTE</h3>
-		
+    <div class="container">		
+		<h3 class="text-start mt-4">LISTA DE CLIENTE</h3>
+        <div class="bg-light container mt-4" style="height: 550px;">
 		<div class="btn-nuevo">
-		<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
+		<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#modalMedicamento" id="btn-nuevo">
 		 <i class="far fa-file"></i> Nuevo cliente
 		</button>
 		</div>
@@ -206,7 +69,7 @@ table {
                 <h4 class="modal-title text-white">Cliente</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" id="idRegistra" action="grabar">
+                <form method="POST" id="idRegistra" th:action="@{grabar}">
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="idCodigo"><b>Codigo</b></label>
@@ -226,7 +89,7 @@ table {
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="idCorreo"><b>Correo</b></label>
-                            <input type="email" class="form-control" id="idCorreo" placeholder="Ingresar Correo" name="correo">
+                            <input type="text" class="form-control" id="idCorreo" placeholder="Ingresar Correo" name="correo">
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="idDireccion"><b>Direccion</b></label>
@@ -244,6 +107,7 @@ table {
 </div>
 <!-- FIN Modal MEDICAMENTO-->
 
+	</div>
 
 	
 	<!-- index js-->
@@ -258,7 +122,7 @@ table {
     });
 </script>
 	<!-- fin index js-->
-	
+	<script src="https://kit.fontawesome.com/8f3aaeb06e.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
@@ -281,6 +145,18 @@ table {
 		});
 		
 	</script>
+		<script th:inline="javascript" th:if="${ERROR != null}">
+		// leer atributo ERROR que proviene del controler.
+		let error = /*[[${ERROR}]]*/
+		
+		toastr.error(error, toastr.options = {
+			"timeOut": "2000",
+			"positionClass " : " toast-top-right ",
+		});
+		
+	</script>
+	
+	
 	
 	<script>
 		$(document).on("click", ".btn-editar", function(){
@@ -320,6 +196,29 @@ table {
 
 
 	</script>
+	<script>
+		/*asignar evento a los botones con la clase btn-eliminar*/
+		$(document).on("click",".btn-eliminar",function(){
+			var cod;
+    		var $row = $(this).closest("tr");
+    		console.log($row); // Verifica la fila seleccionada
+    		var $firstCell = $row.find("td:first");
+   			 console.log($firstCell); // Verifica la primera celda
+    		cod = $firstCell.text();
+			alertify.confirm("SISTEMA","Seguro de eliminar!",
+	  function(){
+			window.location="http://localhost:8091/cliente/eliminar?codigo="+cod
+	  },
+	  function(){ 
+		alertify.error('Cancelado!')
+	  }).
+	  set('labels', {ok:'Si', cancel:'No'});
+		})
+	</script>
+	
+	
+	
+	
 	
 	<script type="text/javascript">    
 	    $(document).ready(function(){     
@@ -337,51 +236,59 @@ table {
 	                    validators: {    
 	                        notEmpty: {    
 	                            message: 'Ingrese nombre'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[a-zA-ZÑñáéíóúÁÉÍÓÚÜü\s]{3,40}$/,    
+	                            message: 'Campo nombre debe ser mayor a 3 y menor a 40 caracteres '    
 	                        }      
 	                    }    
 	                },   
-	                Descripcion: {
-	     	    		selector:'#idDescripcion',       
+	                Apellidos: {
+	     	    		selector:'#idApellido',       
 	                    validators: {    
 	                        notEmpty: {    
 	                            message: 'Ingrese descripción'    
-	                        }      
-	                    }    
-	                },    
-	                Stock: {
-	     	    		selector:'#idStock',      
-	                    validators: {    
-	                        notEmpty: {    
-	                            message: 'Ingrese stock'    
 	                        },
 	                        regexp: {    
-	                            regexp: /^[0-9]{1,2}$/,    
-	                            message: 'Campo stock hasta dos cifras'    
+	                            regexp: /^[a-zA-ZÑñáéíóúÁÉÍÓÚÜü\s]{3,40}$/,    
+	                            message: 'Campo apellido debe ser mayor a 3 y menor a 40 caracteres '    
+	                        }         
+	                    }    
+	                },    
+	                Telefono: {
+	     	    		selector:'#idTelefono',      
+	                    validators: {    
+	                        notEmpty: {    
+	                            message: 'Ingrese telefono'    
+	                        },
+	                        regexp: {    
+	                            regexp: /^[0-9]{1,9}$/,    
+	                            message: 'Campo telefono hasta 9 cifras'    
 	                        },   
 	                    }    
 	                },
-	                precio: {
-	     	    		selector:'#idPrecio',      
+	                Direccion: {
+	     	    		selector:'#idDireccion',      
 	                    validators: {    
 	                        notEmpty: {    
-	                            message: 'Ingrese precio'    
+	                            message: 'Ingrese direccion'    
 	                        },
 	                        regexp: {    
-	                            regexp: /^(\d+|[0-9]+\.\d{1,2})$/,    
-	                            message: 'Campo precio real hasta dos decimales'    
+	                            regexp: /^[/°#0-9a-zA-ZÑñáéíóúÁÉÍÓÚÜü,.":\s]{4,50}$/,    
+	                            message: 'Campo direccion debe ser menor a 50 caracteres'    
 	                        },   
 	                    }    
 	                },       				
-	                Fecha: {
-	     	    		selector:'#usr1',   
+	                Correo: {
+	     	    		selector:'#idCorreo',   
 	                    validators: {    
 	                        notEmpty: {    
-	                            message: 'Seleccione fecha '    
+	                            message: 'Ingrese correo '    
 	                        },
-	                        date: {
-	                            format: 'YYYY-MM-DD',
-	                            message: 'The format is dd/mm/yyyy'
-	                        },
+	                         regexp: {    
+	                            regexp: /(?=.{6,40}$)[0-9a-zA-ZÑñáéíóúÁÉÍÓÚÜü_-]+@[0-9a-zA-ZÑñáéíóúÁÉÍÓÚÜü_-]+\.(com|edu|org)$/,    
+	                            message: 'Ingrese un correo valido que tenga menos de 40 caracteres'    
+	                        },   
 	                    }    
 	                },
 	                Tipo: {
@@ -396,27 +303,5 @@ table {
 	        })					
 	    });    
 	</script>   
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.project.carwash.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.carwash.entity.Empleado;
 import com.project.carwash.entity.Sede;
+import com.project.carwash.entity.Usuario;
 import com.project.carwash.services.EmpleadoServices;
 import com.project.carwash.services.SedeServices;
+import com.project.carwash.services.UsuarioServices;
 
 @Controller
 @RequestMapping ("/empleado")
@@ -21,6 +25,7 @@ public class EmpleadoController {
 	
 	@Autowired
 	private SedeServices servicioSede;
+	
 	
 	@RequestMapping("/lista")
 	public String index (Model model) { //model interface{
@@ -39,31 +44,30 @@ public class EmpleadoController {
 			              @RequestParam("sede") int codSede,
 			              RedirectAttributes redirect) {
 		try {
-			//
-			Empleado emp = new Empleado();			
-			emp.setNombre(nom);
-			emp.setApellido(ape);
-			emp.setCargo(cargo);
-			emp.setTelefono(tele);
-			emp.setCorreo(correo);
-		
-			//
-			Sede sd = new Sede();
-			sd.setCodigo(codSede);
+				Empleado emp = new Empleado();			
+				emp.setNombre(nom);
+				emp.setApellido(ape);
+				emp.setCargo(cargo);
+				emp.setTelefono(tele);
+				emp.setCorreo(correo);
 			
-			//
-			emp.setSede(sd);
-			
-			if(cod == 0) {
-				servicioEmp.registrar(emp);
-				//flash
-				redirect.addFlashAttribute("MENSAJE", "Empleado registrado");
-			} 
-			else {
-				emp.setCodigo(cod);
-				servicioEmp.actualizar(emp);
-				redirect.addFlashAttribute("MENSAJE", "Empleado actualizado");
-			}
+				
+				Sede sd = new Sede();
+				sd.setCodigo(codSede);
+				
+				//
+				emp.setSede(sd);
+				
+				if(cod == 0) {
+					servicioEmp.registrar(emp);
+					//flash
+					redirect.addFlashAttribute("MENSAJE", "Empleado registrado");
+				} 
+				else {
+					emp.setCodigo(cod);
+					servicioEmp.actualizar(emp);
+					redirect.addFlashAttribute("MENSAJE", "Empleado actualizado");
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,8 +76,16 @@ public class EmpleadoController {
 	
 	@RequestMapping("/buscar")
 	@ResponseBody
-	public Empleado buscar (@RequestParam("codigo") Integer cod) {
+	public Empleado buscar(@RequestParam("codigo") Integer cod) {
 		return servicioEmp.buscarPorId(cod);
+	}
+	
+	@RequestMapping("/eliminar")
+	public String eliminar(@RequestParam("codigo") Integer cod,
+			RedirectAttributes redirect) {
+		servicioEmp.eliminarPorId(cod);
+		redirect.addFlashAttribute("MENSAJE" , "Servicio eliminado");
+		return "redirect:/empleado/lista";
 	}
 	
 }

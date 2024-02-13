@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+  <meta charset="UTF-8" />
+  <title>Intranet</title>
+
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+
+	}
+	.contenedor_body{
+		width: 100%;
+		height: 100vh;
+		background: #35a6aa;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.container{
+		position: relative;
+		background: white;
+	    width: 1000px;
+		height: 500px;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+	}
+	.image{
+		border-radius: 10px;
+		position: absolute;
+		width: 60%;
+		height: 500px;
+	}
+	form{
+		position: absolute;
+		right: 0;
+		width: 40%;
+		height: 500px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	#titulo{
+		color: #2e9ea3;
+		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		font-size: 29px;
+		margin-left: 0px;
+	}
+	#parrafo{
+		color: #cdcdcd;
+		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		margin-top: 5px;
+		font-size: 15px;
+		margin-bottom: 15px;
+	}
+	.form-label{
+		display: block;
+		margin-top: 40px;
+		color: #cdcdcd;
+	}
+	.form-control{
+		margin-top: 8px;
+		width: 250px;
+		display: block;
+		background:white;
+		border: none;
+        border-bottom: 1.5px solid #2e9ea3;
+		font-style: italic;
+		transition: margin-top 0.3s, border-color 0.3s;  /* Agrega transiciones para un efecto suave */
+}
+
+.form-control:focus {
+    margin-top: 10px;
+	padding: 10px;
+	border-radius: 9px;
+}
+.boton{
+	margin: 40px;
+	background:#2e9ea3;
+	color: white;
+	width: 200px;
+	height: 40px;
+	text-align: center;
+	border-radius: 5px;
+	border: none;
+}
+.boton:hover{
+	background:#58d2d8;
+
+}
+@media only screen and (max-width:720px){
+	.image{
+		display: none;
+	}
+	form{
+		width: 100%;
+	}
+	.container{
+		width: 550px;
+		height: 450px;
+	}
+}
+@media only screen and (max-width:600px){
+	.container{
+		width: 450px;
+		height: 450px;
+	}
+}
+</style>
+</head>
+
+<body>
+	<div class="contenedor_body">
+		 <div class="container">
+			<img class="image" src="/img/logo_login.jpg" alt="imagen logo">
+			<form  method="post" th:action="@{/session/login}">
+				<h2 id="titulo">Bienvenido de vuelta</h2>
+				<p id="parrafo">Por favor ingrese su usuario y contraseña</p>
+				<div>
+				  <label for="username" class="form-label">Username</label>
+				  <input type="text" class="form-control" id="username" name="username" />
+				</div>
+				<div>
+				  <label for="password" class="form-label font-weight-bold">Password</label>
+				  <input type="password" class="form-control" id="password" name="password"/>
+				</div>
+				<div>
+				  <input type="submit" value="Iniciar Sesion" class="boton">
+				</div>
+			  </form>
+		<div>
+	</div>
+	<script th:inline="javascript" th:if="${MENSAJE!= null}">
+		//leer atributo MENSAJE
+			let msj=/*[[${MENSAJE}]]*/
+		toastr.success(msj, toastr.options = {
+			"timeOut": "2000",
+			"positionClass " : " toast-top-right ",
+		});
+	</script>
+</body>
+</html>
